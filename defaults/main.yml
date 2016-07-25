@@ -1,0 +1,5 @@
+---
+zsh_user_user: "{{ user }}"
+zsh_user_brew_user: "{{ zsh_user_user }}"
+zsh_user_brew_path: /usr/local/bin
+zsh_user_bin: "{{ zsh_user_brew_path }}/zsh"
