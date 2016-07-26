@@ -1,5 +1,4 @@
 ---
-zsh_user_user: "{{ user }}"
-zsh_user_brew_user: "{{ zsh_user_user }}"
-zsh_user_brew_path: /usr/local/bin
-zsh_user_bin: "{{ zsh_user_brew_path }}/zsh"
+zsh_user: "{{ user | default(omit) }}"
+zsh_user_bin: /usr/bin/zsh
+zsh_user_homebrew_path: "{{ homebrew_dir | default('/usr/local') }}"

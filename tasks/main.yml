@@ -1,17 +1,9 @@
-# Linux
-- name: Set zsh as the default shell (linux)
-  user: name={{ zsg_user_user }} shell=/usr/bin/zsh
-  when: ansible_pkg_mgr != 'homebrew'
-  # TODO: check if this works with homebrew
+---
 
-# Homebrew
-- name: Check if zsh is the default shell (Homebrew)
-  shell: "echo $SHELL"
-  become: true
-  become_user: "{{ zsh_user_brew_user }}"
-  register: shell_configured
-  changed_when: shell_configured.stdout != zsh_user_bin
-  when: ansible_pkg_mgr == 'homebrew'
+- name: Set zsh as the default shell (Linux)
+  user: name={{ zsh_user }} shell={{ zsh_user_bin }}
+  when: ansible_pkg_mgr != 'homebrew'
+
 - name: Set zsh as the default shell (Homebrew)
-  command: su - root -c "chsh -s {{ zsh_user_bin }} {{ user }}"
-  when: ansible_pkg_mgr == 'homebrew' and shell_configured|changed
+  user: name={{ zsh_user }} shell={{ zsh_user_homebrew_path }}/bin/zsh
+  when: ansible_pkg_mgr == 'homebrew'
